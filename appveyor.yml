@@ -1,0 +1,63 @@
+# reference: https://www.appveyor.com/docs/appveyor-yml/
+
+version: 0.3.{build}
+
+# build all branches by default
+
+image: Visual Studio 2017
+platform: x64
+configuration: Release
+
+clone_folder: c:\projects\wheel-builder
+clone_depth: 10
+
+# pick as per https://www.appveyor.com/docs/build-environment/#python
+environment:
+  PYPI_PASSWORD:
+    secure: 88m5KgPwi+WCPy5wJlxvRA==
+
+  matrix:
+  # onnx
+  - ONNX_ML: 0
+    ONNXPY_DIR: C:\Python36
+    CONDA_PREFIX: C:\Miniconda36
+
+
+install:
+- cmd: git submodule update --init --recursive
+
+before_build:
+- cmd: SET PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\Scripts;%PATH%
+- cmd: conda install -y -c conda-forge protobuf numpy
+- cmd: pip install pytest-cov nbval
+
+build_script:
+# Build and test onnx.
+- cmd: cd c:\projects\wheel-builder\onnx
+- cmd: python setup.py bdist_wheel --universal --dist-dir .
+- cmd: pip uninstall -y onnx
+- cmd: dir /b /a-d "*.whl" >WheelFile.txt & set /p _wheel= < WheelFile.txt
+- cmd: pip install %_wheel%
+- cmd: pytest
+
+artifacts:
+  - path: 'onnx\*.whl'
+    name: ONNXWheel
+
+# publish artifacts
+after_test:
+- >
+  IF "%APPVEYOR_REPO_BRANCH%" == "master"
+  (
+  echo [distutils]                                  > %USERPROFILE%\\.pypirc &&
+  echo index-servers =                             >> %USERPROFILE%\\.pypirc &&
+  echo     testpypi                                >> %USERPROFILE%\\.pypirc &&
+  echo [testpypi]                                  >> %USERPROFILE%\\.pypirc &&
+  echo repository: https://test.pypi.org/legacy/   >> %USERPROFILE%\\.pypirc &&
+  echo username: raymondxyang                      >> %USERPROFILE%\\.pypirc &&
+  echo password: %PYPI_PASSWORD%                   >> %USERPROFILE%\\.pypirc &&
+  python -m pip install twine &&
+  set HOME=%USERPROFILE% &&
+  python -m twine upload %_wheel% &&
+  del /f %USERPROFILE%\\.pypirc
+  )
