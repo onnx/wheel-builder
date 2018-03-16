@@ -19,9 +19,8 @@ environment:
   matrix:
   # onnx
   - ONNX_ML: 0
-    ONNXPY_DIR: C:\Python36
-    CONDA_PREFIX: C:\Miniconda36
-
+    ONNXPY_DIR: C:\Python36-x64
+    CONDA_PREFIX: C:\Miniconda36-x64
 
 install:
 - cmd: git submodule update --init --recursive
@@ -35,7 +34,7 @@ build_script:
 # Build and test onnx.
 - cmd: cd c:\projects\wheel-builder\onnx
 - cmd: python setup.py bdist_wheel --universal --dist-dir .
-- cmd: pip uninstall -y onnx
+- cmd: pip uninstall -y onnx || ver>nul
 - cmd: dir /b /a-d "*.whl" >WheelFile.txt & set /p _wheel= < WheelFile.txt
 - cmd: pip install %_wheel%
 - cmd: pytest
@@ -46,18 +45,13 @@ artifacts:
 
 # publish artifacts
 after_test:
+- cmd: set REPO=https://test.pypi.org/legacy/
+- cmd: set USERNAME=raymondxyang
 - >
-  IF "%APPVEYOR_REPO_BRANCH%" == "master"
+  IF "%APPVEYOR_REPO_BRANCH%" == "ziya-wheelbuild"
   (
-  echo [distutils]                                  > %USERPROFILE%\\.pypirc &&
-  echo index-servers =                             >> %USERPROFILE%\\.pypirc &&
-  echo     testpypi                                >> %USERPROFILE%\\.pypirc &&
-  echo [testpypi]                                  >> %USERPROFILE%\\.pypirc &&
-  echo repository: https://test.pypi.org/legacy/   >> %USERPROFILE%\\.pypirc &&
-  echo username: raymondxyang                      >> %USERPROFILE%\\.pypirc &&
-  echo password: %PYPI_PASSWORD%                   >> %USERPROFILE%\\.pypirc &&
   python -m pip install twine &&
   set HOME=%USERPROFILE% &&
-  python -m twine upload %_wheel% &&
-  del /f %USERPROFILE%\\.pypirc
+  python -m twine upload --skip-existing %_wheel% --repository-url %REPO% -u %USERNAME% -p %PYPI_PASSWORD%
   )
+- cmd: del /f %USERPROFILE%\\.pypirc
