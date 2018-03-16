@@ -14,7 +14,10 @@ clone_depth: 10
 # pick as per https://www.appveyor.com/docs/build-environment/#python
 environment:
   PYPI_PASSWORD:
-    secure: 88m5KgPwi+WCPy5wJlxvRA==
+    secure: yARz+ghryFiIZJSwJqFL3BUzWecf8cR54+aKTJApNIM=
+  
+  PYPI_USERNAME:
+    secure: Qb6DerVCR79/zeJZrCl1wA==
 
   matrix:
   # onnx
@@ -63,7 +66,7 @@ artifacts:
 # publish artifacts
 after_test:
 - cmd: set REPO=https://test.pypi.org/legacy/
-- cmd: set USERNAME=raymondxyang
+- cmd: set USERNAME=%PYPI_USERNAME%
 # Ensure only master branch can trigger build
 - >
   IF "%APPVEYOR_REPO_BRANCH%" == "master"
