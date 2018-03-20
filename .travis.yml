@@ -1,0 +1,42 @@
+language: generic
+matrix:
+  include:
+  - os: linux
+    sudo: required
+    env: PYTHON_VERSION=python2 ONNX_ML=1
+    language: python
+    python: '2.7'
+
+  - os: osx
+    osx_image: xcode9.3beta
+    env: PYTHON_VERSION=python3 ONNX_ML=1
+env:
+  global:
+  - PB_VERSION=2.6.1
+
+before_install:
+- "./.travis/before_install.sh"
+install:
+- "./.travis/install.sh"
+script:
+- "./.travis/script.sh"
+after_success:
+- "./.travis/after_success.sh"
+after_failure:
+- "./.travis/after_failure.sh"
+
+before_deploy:
+  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+deploy:
+  provider: releases
+  api_key:
+    secure: "q+Rw/0pKdjMKwGVEYmitivbXQmHDrQo2OETSRfxjAVinr+CI8jMkvRmgKST2u/lg2PPjjB1U6bAwr0Vq2aCvxft/s9LGSgxhWgBNNJLdl+Ktvv3JE5QDhGzhZrQSWz5YcE0UBV35PNK7CQrLBxUihxjb0gSHcaUlVaM9zVMq80MePVt/ktZmRLXNkvj9WPJCBqHftEwEU2izry5Unm+MSu/CFKCqigCC4cX4Mx/kud7vo+vsqRmgo3iDx/+ieRGCw1kG9idocPdPW4SuobPwP0HorIPzd8PsdSLOHUf+ZpXZZSTxusCfQEIEDOS77Cj64ZMEyAVjf2zBJD5gaY+mYKNAsMrShA0NTrBda4hpkzoe3cNsLuF0s7iFAzASRlSgXesB0k8/DRQqVKFo9f3WZ7JQh1vDjy325ci2c+7IukCFfvCOj2aqv2JS4E+20nS77SYg1HVeDJrUSAjwl7Y5VmWvlHNQlZALGuQ3WrXq46gBitr/TKnZpl1O0JEfjeo/rDzy11tDeUu7yLCZI8sIniWW4hjuJd13Z4WCOcQmUmO3ogOcRx+uUkbjP1qx2zTm6rruS6LVhTg7EnufnQD4LJNwezPWCZPltu7jxvZLr6fxF7+ZfbvkcUzFGS5gmcO4DbU1txKK6evQNL8f787Qg79KafzbDpaSDgXDNIbmaxg="
+  file: "./onnx/*.whl"
+  skip_cleanup: true
+
+cache:
+- timeout: 300
+- directories:
+  - "$BUILD_CCACHE_DIR"
+  - "$HOME/.ccache"
+  - "$HOME/.cache/pb"
