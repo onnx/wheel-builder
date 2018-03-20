@@ -1,0 +1,59 @@
+language: generic
+matrix:
+  include:
+  - os: linux
+    sudo: required
+    env: PYTHON_VERSION=python2 ONNX_ML=1
+    language: python
+    python: '2.7'
+  - os: linux
+    sudo: required
+    env: PYTHON_VERSION=python3 ONNX_ML=1
+    language: python
+    python: '3.5'
+  - os: linux
+    sudo: required
+    env: PYTHON_VERSION=python3 ONNX_ML=1
+    language: python
+    python: '3.6'
+  - os: osx
+    osx_image: xcode9.3beta
+    env: PYTHON_VERSION=python2 ONNX_ML=1
+  - os: osx
+    osx_image: xcode9.3beta
+    env: PYTHON_VERSION=python3 ONNX_ML=1
+env:
+  global:
+  - PB_VERSION=2.6.1
+
+before_install:
+- "./.travis/before_install.sh"
+install:
+- "./.travis/install.sh"
+script:
+- "./.travis/script.sh"
+after_success:
+- "./.travis/after_success.sh"
+after_failure:
+- "./.travis/after_failure.sh"
+
+before_deploy:
+- cd ./onnx
+- rm -f *.whl
+
+deploy:
+  provider: pypi
+  user:
+    secure: "HAbTuvgeflV8yjeMF3nhxqjydoYQlG0AcgWEbvsQK8e9PLGpBTE5jG/eMGxhSr+atlIYqW27eFTOVnCXBCKgm4RN7RNAp3m5zsAXeq6X3MNeecWB8NQx7bLF4ofZ0PgR5Dv92iPL05fWDyp9hglPPUPqOnD6WLdIRlg29H/ZH0zeu/XvoGVeeCvFXhL3EUobU2MhNeghw9XKTO1X2uMe0RDu0bJZV21w36UsjbLo6fakM4+ev1l4SUwDeWL77ff1aCzWUQgSg/3kXUyCVdDMulBaJULmuKAjsZ+FDt39oCy2p8bu5bkUiYnE2DX7Od/GK70qGlizRhTQupEtQhpGe5vkWU1jd/7tYui4/CzXhaQbDBPRN6cYsCs8RcOP2i1Fk9sNdUPZKeeSGuaiciDDUY3KtNdmW8h61pbQxmSgd0EdR2xmmH8mQK9CMyUEKA1GjlOuhhxkAb6uhQcm7NuLEtjl6NiVKLhYjDeQmLTHBwYafrn7TE/T8sK6lF718DXdwpK9FHu2hIHMJK8ecHjcuNkM3GtXcnrBwfrh61pIcM5vNMCkMuO3pZNB1CjPqlve37eenNt5euU8JqLPAB7zP7ISfaBnRl8fHDya3ZIxr+MRKLQdtkGxfKPCo26mdN9jwSAbKzdSmBQEuzVWhyzyA/8pv6QjoN0sRpVUb6sSoEc="
+  password:
+    secure: "iDwXlFtssX3KJkpUwREGyvL3KRaLC3L41Wgr861JBYIc0ktlu0S7B2+Wial2/Zjg8ocmGgIns0m7/h0zCKJZuSxsotN5u1cC8+3ctpmaiKkay9/XePMsdkCk0Ts9l60yC3CpxRWdutR0vI4wqFnoThamu80NjViDIMsoCrjuigj0uXXGc67dEWEmQTh4AQZTp1K+sG9ta0t5e8+fYCCZX2T/+qDCQWeYcD7lpJzgHjMIoNa7zUGHonq/0HoP5y8KzNSOOkHFzdriiq8mPQ3HzRFPCHaoUsFtCwuPQEMa/O1TWKocY6GYsbsjL539l5Xi9XZSLITsb4lFCWldd5lvhFtWP85DYEXLjBeqjcfVlBcC4QehU2evKpclPswUV+ywRiB9Jd0Zr6A2jjr1RFrfFEokiqjZgpj0/Q+CieG6X62czjkBIsOxPlNrwvJjD0ADENSBtOrNnUrSF1dPIr9AlQn3xYlv41gf9NF5na0Wtbtgk52i1BideiQ4f+M7jjGuaJg56S/49vPmZpMxjpKTNDwqJ1d53+PA94B63CtBm5Uk3ecnXfNPI2/RIaWkfAadbIAgpO4b+FuQ0WvUCe9cn3mWtQ9Xhh761CgZwEWagBfHFCH4Hj3jLPY/WfH8BofREjXr4JOhdZ9/ce+LJmpdvYPv0Akdhy3j5ZgTIts1Km0="
+  distributions: bdist_wheel
+  on:
+    tags: true
+
+cache:
+- timeout: 300
+- directories:
+  - "$BUILD_CCACHE_DIR"
+  - "$HOME/.ccache"
+  - "$HOME/.cache/pb"
