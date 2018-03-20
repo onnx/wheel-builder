@@ -8,7 +8,7 @@ onnx_dir="$PWD"
 # onnx tests
 BASE=$(basename $onnx_dir)
 if [ "$BASE" != "onnx" ]; then
-    cd "${onnx_dir}\onnx"
+    cd "${onnx_dir}/onnx"
 fi
 pip install pytest-cov nbval
 pytest
