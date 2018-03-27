@@ -68,6 +68,7 @@ artifacts:
 
 # publish artifacts
 after_test:
+- cmd: set REPO=https://upload.pypi.org/legacy/
 - cmd: set TESTREPO=https://test.pypi.org/legacy/
 - cmd: set USERNAME=%PYPI_USERNAME%
 # Ensure only master branch can trigger build
