@@ -41,12 +41,12 @@ install:
 - cmd: set repo_dir=onnx
 - cmd: set build_commit=v1.0.1
 - cmd: git submodule update --init --recursive
-- cmd: cd %repo_dir% \
-        && git fetch origin \
-        && git checkout %build_commit% \
-        && git clean -fxd \
-        && git reset --hard \
-        && git submodule update --init --recursive)
+- > cd %repo_dir% &&
+    git fetch origin &&
+    git checkout %build_commit% &&
+    git clean -fxd &&
+    git reset --hard &&
+    git submodule update --init --recursive
 
 before_build:
 - cmd: SET PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\Scripts;%PATH%
