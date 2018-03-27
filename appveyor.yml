@@ -20,27 +20,22 @@ environment:
     secure: Qb6DerVCR79/zeJZrCl1wA==
 
   matrix:
-  # onnx
-  - ONNX_ML: 0
-    ONNXPY_DIR: C:\Python36
-    CONDA_PREFIX: C:\Miniconda36
-
-  - ONNX_ML: 0
-    ONNXPY_DIR: C:\Python36-x64
-    CONDA_PREFIX: C:\Miniconda36-x64
-
-  - ONNX_ML: 0
-    ONNXPY_DIR: C:\Python35
-    CONDA_PREFIX: C:\Miniconda35
-
-  - ONNX_ML: 0
-    ONNXPY_DIR: C:\Python35-x64
-    CONDA_PREFIX: C:\Miniconda35-x64
-
-  # onnx-ml
+  # onnx_ml enabled by default
   - ONNX_ML: 1
     ONNXPY_DIR: C:\Python36
     CONDA_PREFIX: C:\Miniconda36
+
+  - ONNX_ML: 1
+    ONNXPY_DIR: C:\Python36-x64
+    CONDA_PREFIX: C:\Miniconda36-x64
+
+  - ONNX_ML: 1
+    ONNXPY_DIR: C:\Python35
+    CONDA_PREFIX: C:\Miniconda35
+
+  - ONNX_ML: 1
+    ONNXPY_DIR: C:\Python35-x64
+    CONDA_PREFIX: C:\Miniconda35-x64
 
 install:
 - cmd: set repo_dir=onnx
