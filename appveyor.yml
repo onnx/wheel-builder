@@ -43,7 +43,15 @@ environment:
     CONDA_PREFIX: C:\Miniconda36
 
 install:
+- cmd: set repo_dir=onnx
+- cmd: set build_commit=v1.0.1
 - cmd: git submodule update --init --recursive
+- cmd: cd %repo_dir% \
+        && git fetch origin \
+        && git checkout %build_commit% \
+        && git clean -fxd \
+        && git reset --hard \
+        && git submodule update --init --recursive)
 
 before_build:
 - cmd: SET PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\Scripts;%PATH%
@@ -57,7 +65,6 @@ build_script:
 - cmd: pip uninstall -y onnx || ver>nul
 - cmd: dir /b /a-d "*.whl" >WheelFile.txt & set /p _wheel= < WheelFile.txt
 - cmd: pip install %_wheel%
-- cmd: pytest
 
 artifacts:
   - path: 'onnx\*.whl'
@@ -65,11 +72,11 @@ artifacts:
 
 # publish artifacts
 after_test:
-- cmd: set REPO=https://test.pypi.org/legacy/
+- cmd: set TESTREPO=https://test.pypi.org/legacy/
 - cmd: set USERNAME=%PYPI_USERNAME%
 # Ensure only master branch can trigger build
 - >
-  IF "%APPVEYOR_REPO_BRANCH%" == "master" 
+  IF "%APPVEYOR_REPO_BRANCH%" == "master"
   (
   IF "%APPVEYOR_REPO_TAG%" == "true"
   (
@@ -77,5 +84,12 @@ after_test:
   set HOME=%USERPROFILE% &&
   python -m twine upload --skip-existing %_wheel% --repository-url %REPO% -u %USERNAME% -p %PYPI_PASSWORD%
   )
+  )
+- >
+  IF "%APPVEYOR_REPO_BRANCH%" == "test_appveyor_pypi"
+  (
+  python -m pip install twine &&
+  set HOME=%USERPROFILE% &&
+  python -m twine upload --skip-existing %_wheel% --repository-url %TESTREPO% -u %USERNAME% -p %PYPI_PASSWORD%
   )
 - cmd: echo TASK COMPLETED
