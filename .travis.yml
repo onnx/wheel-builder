@@ -25,77 +25,6 @@ matrix:
     # Exclude the default Python 3.5 build
     - python: 3.5
   include:
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=2.7
-      - ONNX_ML=1
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=2.7
-      - ONNX_ML=1
-      - UNICODE_WIDTH=16
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=2.7
-      - ONNX_ML=1
-      - PLAT=i686
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=2.7
-      - ONNX_ML=1
-      - UNICODE_WIDTH=16
-      - PLAT=i686
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=3.5
-      - ONNX_ML=1
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=3.6
-      - ONNX_ML=1
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=3.5
-      - ONNX_ML=1
-      - PLAT=i686
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=3.6
-      - ONNX_ML=1
-      - PLAT=i686
-
-  - os: osx
-    language: generic
-    sudo: required
-    osx_image: xcode9.3beta
-    env:
-      - MB_PYTHON_VERSION=3.5
-      - ONNX_ML=1
-      - MACOSX_DEPLOYMENT_TARGET=10.11
-
-  - os: osx
-    language: generic
-    sudo: required
-    osx_image: xcode9.3beta
-    env:
-      - MB_PYTHON_VERSION=3.6
-      - ONNX_ML=1
-      - MACOSX_DEPLOYMENT_TARGET=10.11
 
   - os: osx
     language: generic
@@ -121,7 +50,7 @@ script:
 after_success:
 - >
   if [ -n "$TRAVIS_TAG" ]; then
-    sudo python -m pip install twine;
+    pip install twine;
     python -m twine upload --skip-existing *.whl --repository-url $REPO -u $PYPI_USERNAME -p $PYPI_PASSWORD ;
     echo "Deployed to PyPI.";
   else
@@ -130,6 +59,7 @@ after_success:
 - >
   if [ "$TRAVIS_BRANCH" == "pypi_test" ]; then
     pip install twine;
+    pip install pyOpenSSL ndg-httpsclient pyasn1;
     ls ${TRAVIS_BUILD_DIR}/wheelhouse/;
     python -m twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl --repository-url $TEST_REPO -u $PYPI_USERNAME -p INVALID ;
     echo "Deployed to test PyPI.";
