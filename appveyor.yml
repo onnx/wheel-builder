@@ -46,7 +46,6 @@ install:
 - cmd: git checkout %build_commit%
 - cmd: git clean -fxd
 - cmd: git reset --hard
-- cmd: git submodule update --init --recursive
 
 before_build:
 - cmd: SET PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\Scripts;%PATH%
