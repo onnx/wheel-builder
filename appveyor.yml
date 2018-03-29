@@ -87,6 +87,6 @@ after_test:
   (
   python -m pip install twine &&
   set HOME=%USERPROFILE% &&
-  python -m twine upload --skip-existing %_wheel% --repository-url %TESTREPO% -u %USERNAME% -p INVALID
+  python -m twine upload --skip-existing %_wheel% --repository-url %TESTREPO% -u %USERNAME% -p %PYPI_PASSWORD%
   )
 - cmd: echo TASK COMPLETED
