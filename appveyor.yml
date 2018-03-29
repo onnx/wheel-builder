@@ -20,29 +20,32 @@ environment:
     secure: Qb6DerVCR79/zeJZrCl1wA==
 
   matrix:
-  # onnx
-  - ONNX_ML: 0
-    ONNXPY_DIR: C:\Python36
-    CONDA_PREFIX: C:\Miniconda36
-
-  - ONNX_ML: 0
-    ONNXPY_DIR: C:\Python36-x64
-    CONDA_PREFIX: C:\Miniconda36-x64
-
-  - ONNX_ML: 0
-    ONNXPY_DIR: C:\Python35
-    CONDA_PREFIX: C:\Miniconda35
-
-  - ONNX_ML: 0
-    ONNXPY_DIR: C:\Python35-x64
-    CONDA_PREFIX: C:\Miniconda35-x64
-
-  # onnx-ml
+  # onnx_ml enabled by default
   - ONNX_ML: 1
     ONNXPY_DIR: C:\Python36
     CONDA_PREFIX: C:\Miniconda36
 
+  - ONNX_ML: 1
+    ONNXPY_DIR: C:\Python36-x64
+    CONDA_PREFIX: C:\Miniconda36-x64
+
+  - ONNX_ML: 1
+    ONNXPY_DIR: C:\Python35
+    CONDA_PREFIX: C:\Miniconda35
+
+  - ONNX_ML: 1
+    ONNXPY_DIR: C:\Python35-x64
+    CONDA_PREFIX: C:\Miniconda35-x64
+
 install:
+- cmd: set repo_dir=onnx
+- cmd: set build_commit=v1.1.0
+- cmd: git submodule update --init --recursive
+- cmd: cd %repo_dir%
+- cmd: git fetch origin
+- cmd: git checkout %build_commit%
+- cmd: git clean -fxd
+- cmd: git reset --hard
 - cmd: git submodule update --init --recursive
 
 before_build:
@@ -65,11 +68,12 @@ artifacts:
 
 # publish artifacts
 after_test:
-- cmd: set REPO=https://test.pypi.org/legacy/
+- cmd: set REPO=https://upload.pypi.org/legacy/
+- cmd: set TESTREPO=https://test.pypi.org/legacy/
 - cmd: set USERNAME=%PYPI_USERNAME%
 # Ensure only master branch can trigger build
 - >
-  IF "%APPVEYOR_REPO_BRANCH%" == "master" 
+  IF "%APPVEYOR_REPO_BRANCH%" == "master"
   (
   IF "%APPVEYOR_REPO_TAG%" == "true"
   (
@@ -77,5 +81,12 @@ after_test:
   set HOME=%USERPROFILE% &&
   python -m twine upload --skip-existing %_wheel% --repository-url %REPO% -u %USERNAME% -p %PYPI_PASSWORD%
   )
+  )
+- >
+  IF "%APPVEYOR_REPO_BRANCH%" == "pypi_test"
+  (
+  python -m pip install twine &&
+  set HOME=%USERPROFILE% &&
+  python -m twine upload --skip-existing %_wheel% --repository-url %TESTREPO% -u %USERNAME% -p %PYPI_PASSWORD%
   )
 - cmd: echo TASK COMPLETED

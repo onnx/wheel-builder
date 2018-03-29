@@ -1,55 +1,74 @@
-language: generic
+env:
+  global:
+    - REPO_DIR=onnx
+    - BUILD_COMMIT=v1.1.0
+    - PLAT=x86_64
+    - PB_VERSION=2.6.1
+    - UNICODE_WIDTH=32
+    - REPO=https://upload.pypi.org/legacy/
+    - TEST_REPO=https://test.pypi.org/legacy/
+    - secure: QoYek8syaGZ0WxUCJqZvRvmSWsPVg7tlON8yPcgc4VgqSgAb2bNt4Na5WPiub6PFs/sIc9vEvMty3tcjMfkW4aUtalSnLJAx1S+EArhhY8KRkCxWmNPv8PQi6f769tgbQHCTFFOa+b7Y6jY6Z7jAQ2AJ+Yu6eblq7edU/yV1coP6Gd9zrBwUsDrGgy366O819DeVseozohw62sIQmkk901b8T5Jwtel9Xsu/wdmAlI6d/mTP1//wgFhaENGUhZle9K+0Y/mNlvmDn6axWl5q2WqTbt/nhEWNJHz/Fr13YND/eO8Xt3JBR8vs04+4c1+dqy/nS27IoEmdSxi06GuKqc82muSVODUhpQ0P4z/4EqtCvlHWEi7VtEfQBB0aAePvQz0lAVAhfZE9376XtQnXbaRWZUDg05YFuUHaYhHlRe5N3fDyYzyJyUWsJgkvqhTumrENPRuWBWYZSXnP98XHVTHkmYG+aMUjmzpLuGIkcS4SKDV594ikyN6ERkDMsclc/nZBJLyhivi+okrq3LtAHpY1bBALXcvmZsfMdGrDv904X1ifC/CQpha5N0Xj+2mYv76K3MnEj8WdWYPBwp5gNiKH59bRcDFiMkaNwwXGvGVcDsIg0uEaO29pcRfZeZYemAzS/3Lht7zzzNxL6sM//2+ufRaIlyx0xzjc9uTxtZA=
+    - secure: U2EmHLHZoyi6xuX3SthN4U9N7akwPzEkAv4F4TAoh+PZfQzJqverQ/yjlEMz5U/YbD5d2dQ0GjAZEcwoRTb1RfhYYRAT1aAGxezIcNUcBe70tPbO5u86a2GBL7mFDYcUWUAjxUiQ2vcGz/YO2juXmxxGXPLUBQ1qatnJbull333bi4N1fipsK6fV3SUphIZhi81pzHJZ8gDJln1vWAVZg669NhUu3HWmV4Q9TQDUo0oJj6WGTZAFnPoeVaXGex3xJ/cCOcz9N6beUpXBWeCCmwTrXc68h/DX28hKkLyRIfVbCRCvaDXrFkOis5boZJqfMYFMNqsyKwATWYnU7JVBwSgFWsLI9ItLCX+GrYOzM8odMOi3qtWbtgryghPNZtg8lKB2b6sK3f0/Awr/ccrSQ/D9i8ZrQF9xei+XdiJE7gtBvYFFfg4pOvvQHYMM0A5SIbc1dm8E4PGwZI/YTpTBeE3jgW4igZ/uTtYMcVLb14V/D/yHdqAE9Edzok1GsTSocnjdMXMSMYZEwY9/PiD9EPbtzfxTL8Mrgw7jfU7PxPHY1pzR/lXqZ4wuwHL7/+aGjQW2PCaIKXKMwJpGWibmCyZ4vcPdWCmNt/F9fxmWfxXLbvJSlOKTnqK7PKoqX3G4dfgrOZF5DqDTL8blfulX0IYoSze8v8L2qebF+nBfCUI=
+
+language: python
+# Default Python version is usually 2.7
+python: 3.5
+sudo: required
+dist: trusty
+services: docker
+# Force xcode 6.4 image to work round
+# https://github.com/python-pillow/pillow-wheels/issues/45
+osx_image: xcode9.3beta
+
 matrix:
+  exclude:
+    # Exclude the default Python 3.5 build
+    - python: 3.5
   include:
   - os: linux
     sudo: required
-    env: PYTHON_VERSION=python2 ONNX_ML=1
-    language: python
-    python: '2.7'
-  - os: linux
-    sudo: required
-    env: PYTHON_VERSION=python3 ONNX_ML=1
-    language: python
-    python: '3.5'
-  - os: linux
-    sudo: required
-    env: PYTHON_VERSION=python3 ONNX_ML=1
-    language: python
-    python: '3.6'
+    env:
+      - MB_PYTHON_VERSION=2.7
+      - ONNX_ML=1
   - os: osx
+    language: generic
+    sudo: required
     osx_image: xcode9.3beta
-    env: PYTHON_VERSION=python2 ONNX_ML=1
-  - os: osx
-    osx_image: xcode9.3beta
-    env: PYTHON_VERSION=python3 ONNX_ML=1
-env:
-  global:
-  - PB_VERSION=2.6.1
+    env:
+      - MB_PYTHON_VERSION=3.5
+      - ONNX_ML=1
+      - MACOSX_DEPLOYMENT_TARGET=10.11
 
 before_install:
-- "./.travis/before_install.sh"
+  - source multibuild/common_utils.sh;
+  - source multibuild/travis_steps.sh;
+  - before_install;
+
 install:
-- "./.travis/install.sh"
+  - clean_code $REPO_DIR $BUILD_COMMIT;
+  - build_wheel $REPO_DIR $PLAT;
+
 script:
-- "./.travis/script.sh"
+  - install_run $PLAT
+
 after_success:
-- "./.travis/after_success.sh"
-after_failure:
-- "./.travis/after_failure.sh"
-
-before_deploy:
-- cd ./onnx
-- rm -f *.whl
-
-deploy:
-  provider: pypi
-  user:
-    secure: "HAbTuvgeflV8yjeMF3nhxqjydoYQlG0AcgWEbvsQK8e9PLGpBTE5jG/eMGxhSr+atlIYqW27eFTOVnCXBCKgm4RN7RNAp3m5zsAXeq6X3MNeecWB8NQx7bLF4ofZ0PgR5Dv92iPL05fWDyp9hglPPUPqOnD6WLdIRlg29H/ZH0zeu/XvoGVeeCvFXhL3EUobU2MhNeghw9XKTO1X2uMe0RDu0bJZV21w36UsjbLo6fakM4+ev1l4SUwDeWL77ff1aCzWUQgSg/3kXUyCVdDMulBaJULmuKAjsZ+FDt39oCy2p8bu5bkUiYnE2DX7Od/GK70qGlizRhTQupEtQhpGe5vkWU1jd/7tYui4/CzXhaQbDBPRN6cYsCs8RcOP2i1Fk9sNdUPZKeeSGuaiciDDUY3KtNdmW8h61pbQxmSgd0EdR2xmmH8mQK9CMyUEKA1GjlOuhhxkAb6uhQcm7NuLEtjl6NiVKLhYjDeQmLTHBwYafrn7TE/T8sK6lF718DXdwpK9FHu2hIHMJK8ecHjcuNkM3GtXcnrBwfrh61pIcM5vNMCkMuO3pZNB1CjPqlve37eenNt5euU8JqLPAB7zP7ISfaBnRl8fHDya3ZIxr+MRKLQdtkGxfKPCo26mdN9jwSAbKzdSmBQEuzVWhyzyA/8pv6QjoN0sRpVUb6sSoEc="
-  password:
-    secure: "iDwXlFtssX3KJkpUwREGyvL3KRaLC3L41Wgr861JBYIc0ktlu0S7B2+Wial2/Zjg8ocmGgIns0m7/h0zCKJZuSxsotN5u1cC8+3ctpmaiKkay9/XePMsdkCk0Ts9l60yC3CpxRWdutR0vI4wqFnoThamu80NjViDIMsoCrjuigj0uXXGc67dEWEmQTh4AQZTp1K+sG9ta0t5e8+fYCCZX2T/+qDCQWeYcD7lpJzgHjMIoNa7zUGHonq/0HoP5y8KzNSOOkHFzdriiq8mPQ3HzRFPCHaoUsFtCwuPQEMa/O1TWKocY6GYsbsjL539l5Xi9XZSLITsb4lFCWldd5lvhFtWP85DYEXLjBeqjcfVlBcC4QehU2evKpclPswUV+ywRiB9Jd0Zr6A2jjr1RFrfFEokiqjZgpj0/Q+CieG6X62czjkBIsOxPlNrwvJjD0ADENSBtOrNnUrSF1dPIr9AlQn3xYlv41gf9NF5na0Wtbtgk52i1BideiQ4f+M7jjGuaJg56S/49vPmZpMxjpKTNDwqJ1d53+PA94B63CtBm5Uk3ecnXfNPI2/RIaWkfAadbIAgpO4b+FuQ0WvUCe9cn3mWtQ9Xhh761CgZwEWagBfHFCH4Hj3jLPY/WfH8BofREjXr4JOhdZ9/ce+LJmpdvYPv0Akdhy3j5ZgTIts1Km0="
-  distributions: bdist_wheel
-  on:
-    tags: true
+- >
+  if [ -n "$TRAVIS_TAG" ]; then
+    sudo python -m pip install twine;
+    python -m twine upload --skip-existing *.whl --repository-url $REPO -u $PYPI_USERNAME -p $PYPI_PASSWORD ;
+    echo "Deployed to PyPI.";
+  else
+    echo "Not deploying as not a tagged commit.";
+  fi
+- >
+  if [ "$TRAVIS_BRANCH" == "pypi_test" ]; then
+    pip install twine;
+    ls ${TRAVIS_BUILD_DIR}/wheelhouse/;
+    python -m twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl --repository-url $TEST_REPO -u $PYPI_USERNAME -p $PYPI_PASSWORD ;
+    echo "Deployed to test PyPI.";
+  else
+    echo "Not deploying as not a commit on test branch.";
+  fi
 
 cache:
 - timeout: 300
