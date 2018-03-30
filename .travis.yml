@@ -86,7 +86,7 @@ matrix:
     env:
       - MB_PYTHON_VERSION=3.5
       - ONNX_ML=1
-      - MACOSX_DEPLOYMENT_TARGET=10.11
+      - MACOSX_DEPLOYMENT_TARGET=10.9
 
   - os: osx
     language: generic
@@ -95,7 +95,7 @@ matrix:
     env:
       - MB_PYTHON_VERSION=3.6
       - ONNX_ML=1
-      - MACOSX_DEPLOYMENT_TARGET=10.11
+      - MACOSX_DEPLOYMENT_TARGET=10.9
 
   - os: osx
     language: generic
@@ -104,7 +104,7 @@ matrix:
     env:
       - MB_PYTHON_VERSION=2.7
       - ONNX_ML=1
-      - MACOSX_DEPLOYMENT_TARGET=10.11
+      - MACOSX_DEPLOYMENT_TARGET=10.9
 
 before_install:
   - source multibuild/common_utils.sh;
