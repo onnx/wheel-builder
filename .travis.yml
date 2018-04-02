@@ -1,0 +1,147 @@
+env:
+  global:
+    - REPO_DIR=onnx
+    - BUILD_COMMIT=v1.1.0
+    - PLAT=x86_64
+    - PB_VERSION=2.6.1
+    - UNICODE_WIDTH=32
+    - REPO=https://upload.pypi.org/legacy/
+    - TEST_REPO=https://test.pypi.org/legacy/
+    - secure: QoYek8syaGZ0WxUCJqZvRvmSWsPVg7tlON8yPcgc4VgqSgAb2bNt4Na5WPiub6PFs/sIc9vEvMty3tcjMfkW4aUtalSnLJAx1S+EArhhY8KRkCxWmNPv8PQi6f769tgbQHCTFFOa+b7Y6jY6Z7jAQ2AJ+Yu6eblq7edU/yV1coP6Gd9zrBwUsDrGgy366O819DeVseozohw62sIQmkk901b8T5Jwtel9Xsu/wdmAlI6d/mTP1//wgFhaENGUhZle9K+0Y/mNlvmDn6axWl5q2WqTbt/nhEWNJHz/Fr13YND/eO8Xt3JBR8vs04+4c1+dqy/nS27IoEmdSxi06GuKqc82muSVODUhpQ0P4z/4EqtCvlHWEi7VtEfQBB0aAePvQz0lAVAhfZE9376XtQnXbaRWZUDg05YFuUHaYhHlRe5N3fDyYzyJyUWsJgkvqhTumrENPRuWBWYZSXnP98XHVTHkmYG+aMUjmzpLuGIkcS4SKDV594ikyN6ERkDMsclc/nZBJLyhivi+okrq3LtAHpY1bBALXcvmZsfMdGrDv904X1ifC/CQpha5N0Xj+2mYv76K3MnEj8WdWYPBwp5gNiKH59bRcDFiMkaNwwXGvGVcDsIg0uEaO29pcRfZeZYemAzS/3Lht7zzzNxL6sM//2+ufRaIlyx0xzjc9uTxtZA=
+    - secure: U2EmHLHZoyi6xuX3SthN4U9N7akwPzEkAv4F4TAoh+PZfQzJqverQ/yjlEMz5U/YbD5d2dQ0GjAZEcwoRTb1RfhYYRAT1aAGxezIcNUcBe70tPbO5u86a2GBL7mFDYcUWUAjxUiQ2vcGz/YO2juXmxxGXPLUBQ1qatnJbull333bi4N1fipsK6fV3SUphIZhi81pzHJZ8gDJln1vWAVZg669NhUu3HWmV4Q9TQDUo0oJj6WGTZAFnPoeVaXGex3xJ/cCOcz9N6beUpXBWeCCmwTrXc68h/DX28hKkLyRIfVbCRCvaDXrFkOis5boZJqfMYFMNqsyKwATWYnU7JVBwSgFWsLI9ItLCX+GrYOzM8odMOi3qtWbtgryghPNZtg8lKB2b6sK3f0/Awr/ccrSQ/D9i8ZrQF9xei+XdiJE7gtBvYFFfg4pOvvQHYMM0A5SIbc1dm8E4PGwZI/YTpTBeE3jgW4igZ/uTtYMcVLb14V/D/yHdqAE9Edzok1GsTSocnjdMXMSMYZEwY9/PiD9EPbtzfxTL8Mrgw7jfU7PxPHY1pzR/lXqZ4wuwHL7/+aGjQW2PCaIKXKMwJpGWibmCyZ4vcPdWCmNt/F9fxmWfxXLbvJSlOKTnqK7PKoqX3G4dfgrOZF5DqDTL8blfulX0IYoSze8v8L2qebF+nBfCUI=
+
+language: python
+# Default Python version is usually 2.7
+python: 3.5
+sudo: required
+dist: trusty
+services: docker
+# Force xcode 6.4 image to work round
+# https://github.com/python-pillow/pillow-wheels/issues/45
+osx_image: xcode9.3beta
+
+matrix:
+  exclude:
+    # Exclude the default Python 3.5 build
+    - python: 3.5
+  include:
+  - os: linux
+    sudo: required
+    env:
+      - MB_PYTHON_VERSION=2.7
+      - ONNX_ML=1
+
+  - os: linux
+    sudo: required
+    env:
+      - MB_PYTHON_VERSION=2.7
+      - ONNX_ML=1
+      - UNICODE_WIDTH=16
+
+  - os: linux
+    sudo: required
+    env:
+      - MB_PYTHON_VERSION=2.7
+      - ONNX_ML=1
+      - PLAT=i686
+
+  - os: linux
+    sudo: required
+    env:
+      - MB_PYTHON_VERSION=2.7
+      - ONNX_ML=1
+      - UNICODE_WIDTH=16
+      - PLAT=i686
+
+  - os: linux
+    sudo: required
+    env:
+      - MB_PYTHON_VERSION=3.5
+      - ONNX_ML=1
+
+  - os: linux
+    sudo: required
+    env:
+      - MB_PYTHON_VERSION=3.6
+      - ONNX_ML=1
+
+  - os: linux
+    sudo: required
+    env:
+      - MB_PYTHON_VERSION=3.5
+      - ONNX_ML=1
+      - PLAT=i686
+
+  - os: linux
+    sudo: required
+    env:
+      - MB_PYTHON_VERSION=3.6
+      - ONNX_ML=1
+      - PLAT=i686
+
+  - os: osx
+    language: generic
+    sudo: required
+    osx_image: xcode9.3beta
+    env:
+      - MB_PYTHON_VERSION=3.5
+      - ONNX_ML=1
+      - MACOSX_DEPLOYMENT_TARGET=10.9
+
+  - os: osx
+    language: generic
+    sudo: required
+    osx_image: xcode9.3beta
+    env:
+      - MB_PYTHON_VERSION=3.6
+      - ONNX_ML=1
+      - MACOSX_DEPLOYMENT_TARGET=10.9
+
+  - os: osx
+    language: generic
+    sudo: required
+    osx_image: xcode9.3beta
+    env:
+      - MB_PYTHON_VERSION=2.7
+      - ONNX_ML=1
+      - MACOSX_DEPLOYMENT_TARGET=10.9
+
+before_install:
+  - source multibuild/common_utils.sh;
+  - source multibuild/travis_steps.sh;
+  - before_install;
+
+install:
+  - clean_code $REPO_DIR $BUILD_COMMIT;
+  - build_wheel $REPO_DIR $PLAT;
+
+script:
+  - install_run $PLAT
+
+after_success:
+- >
+  if [ -n "$TRAVIS_TAG" ]; then
+    pip install twine;
+    pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
+    python -m twine upload --skip-existing *.whl --repository-url $REPO -u $PYPI_USERNAME -p $PYPI_PASSWORD ;
+    echo "Deployed to PyPI.";
+  else
+    echo "Not deploying as not a tagged commit.";
+  fi
+- >
+  if [ "$TRAVIS_BRANCH" == "pypi_test" ]; then
+    pip install twine;
+    pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
+    ls ${TRAVIS_BUILD_DIR}/wheelhouse/;
+    python -m twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl --repository-url $TEST_REPO -u $PYPI_USERNAME -p $PYPI_PASSWORD ;
+    echo "Deployed to test PyPI.";
+  else
+    echo "Not deploying as not a commit on test branch.";
+  fi
+
+cache:
+- timeout: 300
+- directories:
+  - "$BUILD_CCACHE_DIR"
+  - "$HOME/.ccache"
+  - "$HOME/.cache/pb"

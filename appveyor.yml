@@ -39,14 +39,13 @@ environment:
 
 install:
 - cmd: set repo_dir=onnx
-- cmd: set build_commit=v1.0.1
+- cmd: set build_commit=v1.1.0
 - cmd: git submodule update --init --recursive
 - cmd: cd %repo_dir%
 - cmd: git fetch origin
 - cmd: git checkout %build_commit%
 - cmd: git clean -fxd
 - cmd: git reset --hard
-- cmd: git submodule update --init --recursive
 
 before_build:
 - cmd: SET PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\Scripts;%PATH%
@@ -60,7 +59,7 @@ build_script:
 - cmd: pip uninstall -y onnx || ver>nul
 - cmd: dir /b /a-d "*.whl" >WheelFile.txt & set /p _wheel= < WheelFile.txt
 - cmd: pip install %_wheel%
-# Disable the test temporarily for 1.0.1 as data updated
+- cmd: pytest
 
 artifacts:
   - path: 'onnx\*.whl'
@@ -83,7 +82,7 @@ after_test:
   )
   )
 - >
-  IF "%APPVEYOR_REPO_BRANCH%" == "test_appveyor_pypi"
+  IF "%APPVEYOR_REPO_BRANCH%" == "pypi_test"
   (
   python -m pip install twine &&
   set HOME=%USERPROFILE% &&
