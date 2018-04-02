@@ -37,7 +37,7 @@ function build_libs {
 function run_tests {
     cd ..
     local wkdir_path="$(pwd)"
-    echo test root path: $wkdir_path
+    echo Running tests at root path: ${wkdir_path}
     cd ${wkdir_path}/onnx
     pip install tornado==4.5.3
     pip install pytest-cov nbval

@@ -122,6 +122,7 @@ after_success:
 - >
   if [ -n "$TRAVIS_TAG" ]; then
     pip install twine;
+    pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
     python -m twine upload --skip-existing *.whl --repository-url $REPO -u $PYPI_USERNAME -p $PYPI_PASSWORD ;
     echo "Deployed to PyPI.";
   else
