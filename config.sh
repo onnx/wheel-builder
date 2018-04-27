@@ -1,6 +1,7 @@
 #!/bin/bash
 function build_wheel {
     build_libs
+    export ONNX_ML=1
     time ONNX_NAMESPACE=ONNX_NAMESPACE build_bdist_wheel $@
 }
 
