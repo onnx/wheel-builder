@@ -2,7 +2,7 @@
 function build_wheel {
     build_libs
     export ONNX_ML=1
-    time ONNX_NAMESPACE=ONNX_NAMESPACE build_bdist_wheel :all: --global-option build --global-option --debug $@
+    time ONNX_NAMESPACE=ONNX_NAMESPACE build_bdist_wheel $@
 }
 
 function build_libs {
