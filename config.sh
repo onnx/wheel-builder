@@ -2,7 +2,7 @@
 function build_wheel {
     build_libs
     export ONNX_ML=1
-    time ONNX_NAMESPACE=ONNX_NAMESPACE build_bdist_wheel $@
+    time ONNX_NAMESPACE=ONNX_NAMESPACE build_bdist_wheel :all: --global-option build --global-option --debug $@
 }
 
 function build_libs {
@@ -20,7 +20,7 @@ function build_libs {
         PB_VERSION=2.6.1
         mkdir -p "$pb_dir"
         curl -L -O https://github.com/google/protobuf/releases/download/v${PB_VERSION}/protobuf-${PB_VERSION}.tar.gz
-        tar -xzvf protobuf-${PB_VERSION}.tar.gz -C "$pb_dir" --strip-components 1
+        tar -xzf protobuf-${PB_VERSION}.tar.gz -C "$pb_dir" --strip-components 1
         activate_ccache
         ccache -z
         cd ${pb_dir} && ./configure && make -j${NUMCORES} && make check && make install && ldconfig 2>&1 || true
@@ -32,7 +32,23 @@ function build_libs {
         echo PATH: $PATH
         pip install pytest-runner
     fi
+
     cd ${wkdir_path}
+
+    if [ -z "$IS_OSX" ]; then
+       cmake_dir="${wkdir_path}/cmake"
+       mkdir -p "$cmake_dir"
+       curl -L -O https://cmake.org/files/v3.1/cmake-3.1.2.tar.gz
+       tar -xzf cmake-3.1.2.tar.gz -C "$cmake_dir" --strip-components 1
+       cd ${cmake_dir} && ls ${cmake_dir}
+       ./configure --prefix=${cmake_dir}/build
+       make -j${NUMCORES} && make install
+       ${cmake_dir}/build/bin/cmake -version
+       export PATH="${cmake_dir}/build/bin:$PATH"
+    fi
+
+    cd ${wkdir_path}
+    pip install protobuf numpy
 }
 
 function run_tests {
