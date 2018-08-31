@@ -1,7 +1,7 @@
 env:
   global:
     - REPO_DIR=onnx
-    - BUILD_COMMIT=3376d4438aaadfba483399fa249b841153152bc0
+    - BUILD_COMMIT=bae6333e149a59a3faa9c4d9c44974373dcf5256
     - PLAT=x86_64
     - PB_VERSION=2.6.1
     - UNICODE_WIDTH=32
@@ -25,60 +25,6 @@ matrix:
     # Exclude the default Python 3.5 build
     - python: 3.5
   include:
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=2.7
-      - ONNX_ML=1
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=2.7
-      - ONNX_ML=1
-      - UNICODE_WIDTH=16
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=2.7
-      - ONNX_ML=1
-      - PLAT=i686
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=2.7
-      - ONNX_ML=1
-      - UNICODE_WIDTH=16
-      - PLAT=i686
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=3.5
-      - ONNX_ML=1
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=3.6
-      - ONNX_ML=1
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=3.5
-      - ONNX_ML=1
-      - PLAT=i686
-
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=3.6
-      - ONNX_ML=1
-      - PLAT=i686
-
   - os: osx
     language: generic
     sudo: required
