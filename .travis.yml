@@ -1,7 +1,7 @@
 env:
   global:
     - REPO_DIR=onnx
-    - BUILD_COMMIT=8a1319733a5518bd0001842db27e2df53a306eff
+    - BUILD_COMMIT=9e55ace55aad1ada27516038dfbdc66a8a0763db
     - PLAT=x86_64
     - PB_VERSION=2.6.1
     - UNICODE_WIDTH=32
