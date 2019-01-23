@@ -39,7 +39,7 @@ environment:
 
 install:
 - cmd: set repo_dir=onnx
-- cmd: set build_commit=5af210ca8a1c73aa6bae8754c9346ec54d0a756e
+- cmd: set build_commit=8a1319733a5518bd0001842db27e2df53a306eff
 - cmd: git submodule update --init --recursive
 - cmd: cd %repo_dir%
 - cmd: git fetch origin
@@ -49,7 +49,7 @@ install:
 
 before_build:
 - cmd: SET PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\Scripts;%PATH%
-- cmd: conda install -y -c conda-forge protobuf numpy
+- cmd: conda install -y -c conda-forge protobuf=3.5.2 numpy
 - cmd: pip install pytest-cov nbval
 
 build_script:
