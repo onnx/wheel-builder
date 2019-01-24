@@ -39,7 +39,7 @@ environment:
 
 install:
 - cmd: set repo_dir=onnx
-- cmd: set build_commit=8a1319733a5518bd0001842db27e2df53a306eff
+- cmd: set build_commit=9e55ace55aad1ada27516038dfbdc66a8a0763db
 - cmd: git submodule update --init --recursive
 - cmd: cd %repo_dir%
 - cmd: git fetch origin
