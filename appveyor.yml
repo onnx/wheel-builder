@@ -36,6 +36,14 @@ environment:
   - ONNX_ML: 1
     ONNXPY_DIR: C:\Python35-x64
     CONDA_PREFIX: C:\Miniconda35-x64
+  
+  - ONNX_ML: 1
+    ONNXPY_DIR: C:\Python37
+    CONDA_PREFIX: C:\Miniconda37
+
+  - ONNX_ML: 1
+    ONNXPY_DIR: C:\Python37-x64
+    CONDA_PREFIX: C:\Miniconda37-x64
 
 install:
 - cmd: set repo_dir=onnx
