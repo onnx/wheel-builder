@@ -42,7 +42,16 @@ matrix:
       - MB_PYTHON_VERSION=3.6
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-
+  
+  - os: osx
+    language: generic
+    sudo: required
+    osx_image: xcode9.3beta
+    env:
+      - MB_PYTHON_VERSION=3.7
+      - ONNX_ML=1
+      - MACOSX_DEPLOYMENT_TARGET=10.9
+  
   - os: osx
     language: generic
     sudo: required
