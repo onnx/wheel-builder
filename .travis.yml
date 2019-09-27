@@ -14,16 +14,15 @@ language: python
 # Default Python version is usually 2.7
 python: 3.5
 sudo: required
-dist: trusty
+dist: xenial
 services: docker
 # Force xcode 6.4 image to work round
 # https://github.com/python-pillow/pillow-wheels/issues/45
 osx_image: xcode9.3beta
-
 matrix:
+  # Exclude the default Python 3.5 build
   exclude:
-    # Exclude the default Python 3.5 build
-    - python: 3.5
+  - python: 3.5
   include:
   - os: osx
     language: generic
@@ -33,7 +32,6 @@ matrix:
       - MB_PYTHON_VERSION=3.5
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-
   - os: osx
     language: generic
     sudo: required
@@ -42,7 +40,6 @@ matrix:
       - MB_PYTHON_VERSION=3.6
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  
   - os: osx
     language: generic
     sudo: required
@@ -51,7 +48,6 @@ matrix:
       - MB_PYTHON_VERSION=3.7
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  
   - os: osx
     language: generic
     sudo: required
@@ -60,6 +56,52 @@ matrix:
       - MB_PYTHON_VERSION=2.7
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
+  - os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=2.7 
+      - ONNX_ML=1 
+  - os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=2.7 
+      - ONNX_ML=1 
+      - UNICODE_WIDTH=16 
+  - os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=2.7 
+      - ONNX_ML=1 
+      - PLAT=i686 
+  - os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=2.7 
+      - ONNX_ML=1 
+      - UNICODE_WIDTH=16 
+      - PLAT=i686 
+  - os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=3.5 
+      - ONNX_ML=1 
+  - os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=3.6 
+      - ONNX_ML=1 
+  - os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=3.5 
+      - ONNX_ML=1 
+      - PLAT=i686 
+  - os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=3.6 
+      - ONNX_ML=1 
+      - PLAT=i686
 
 before_install:
   - source multibuild/common_utils.sh;
