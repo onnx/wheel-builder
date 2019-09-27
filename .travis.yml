@@ -94,6 +94,11 @@ matrix:
   - os: linux 
     sudo: required 
     env: 
+      - MB_PYTHON_VERSION=3.7 
+      - ONNX_ML=1 
+  - os: linux 
+    sudo: required 
+    env: 
       - MB_PYTHON_VERSION=3.5 
       - ONNX_ML=1 
       - PLAT=i686 
@@ -101,6 +106,12 @@ matrix:
     sudo: required 
     env: 
       - MB_PYTHON_VERSION=3.6 
+      - ONNX_ML=1 
+      - PLAT=i686
+  - os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=3.7 
       - ONNX_ML=1 
       - PLAT=i686
 
