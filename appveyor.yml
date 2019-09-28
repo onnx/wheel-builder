@@ -88,7 +88,7 @@ after_test:
 # The package twine needs python >= 3.6, so we
 # need another conda enviroment to install
 # the right twine.
-- cmd: conda create -n -y twine-publish python=3.6
+- cmd: conda create -y -n twine-publish python=3.6
 - cmd: conda activate twine-publish
 - cmd: set REPO=https://upload.pypi.org/legacy/
 - cmd: set TESTREPO=https://test.pypi.org/legacy/
