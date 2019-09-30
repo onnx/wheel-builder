@@ -88,6 +88,12 @@ after_test:
 - cmd: set REPO=https://upload.pypi.org/legacy/
 - cmd: set TESTREPO=https://test.pypi.org/legacy/
 - cmd: set USERNAME=%PYPI_USERNAME%
+# The package twine requires python >= 3.6, so
+# we upgrade python before doing anything related
+# to twine. Note that twine is only for publishing
+# packages, so this change won't affect the package
+# we built.
+- cmd: conda upgrade -y python
 # Ensure only master branch can trigger build
 - >
   IF "%APPVEYOR_REPO_BRANCH%" == "master"
@@ -96,7 +102,7 @@ after_test:
   (
   python -m pip install twine &&
   set HOME=%USERPROFILE% &&
-  python -m twine upload --skip-existing %_wheel% --repository-url %REPO% -u %USERNAME% -p %PYPI_PASSWORD%
+  python -m twine upload --verbose --skip-existing %_wheel% --repository-url %REPO% -u %USERNAME% -p %PYPI_PASSWORD%
   )
   )
 - >
@@ -104,6 +110,6 @@ after_test:
   (
   python -m pip install twine &&
   set HOME=%USERPROFILE% &&
-  python -m twine upload --skip-existing %_wheel% --repository-url %TESTREPO% -u %USERNAME% -p %PYPI_PASSWORD%
+  python -m twine upload --verbose --skip-existing %_wheel% --repository-url %TESTREPO% -u %USERNAME% -p %PYPI_PASSWORD%
   )
 - cmd: echo TASK COMPLETED
