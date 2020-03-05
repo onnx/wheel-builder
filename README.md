@@ -1,7 +1,7 @@
 Building and uploading ONNX wheels
 ===================================
 
-This Git Repository enables automation of wheel building and deploying of **[ONNX](https://github.com/onnx/onnx)** packages.
+This Git Repository enables automation of wheel building and deploying of **[ONNX](https://github.com/onnx/onnx)** packages..
 
 
 Using the repository
