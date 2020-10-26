@@ -1,7 +1,7 @@
 env:
   global:
     - REPO_DIR=onnx
-    - BUILD_COMMIT=63a586914d51fdfd6d8668e81de043e3d9b0b382
+    - BUILD_COMMIT=87eb5988a5cced69b946f3d3f2963a0e271940b9
     - PLAT=x86_64
     - PB_VERSION=2.6.1
     - UNICODE_WIDTH=32
@@ -57,45 +57,53 @@ matrix:
   - os: linux 
     sudo: required 
     env: 
-      - MB_PYTHON_VERSION=3.5 
-      - ONNX_ML=1 
+      - MB_PYTHON_VERSION=3.5
+      - MB_ML_VER=2014
+      - ONNX_ML=1
   - os: linux 
     sudo: required 
     env: 
-      - MB_PYTHON_VERSION=3.6 
-      - ONNX_ML=1 
+      - MB_PYTHON_VERSION=3.6
+      - MB_ML_VER=2014
+      - ONNX_ML=1
   - os: linux 
     sudo: required 
     env: 
-      - MB_PYTHON_VERSION=3.7 
+      - MB_PYTHON_VERSION=3.7
+      - MB_ML_VER=2014
       - ONNX_ML=1
   - os: linux
     sudo: required
     env:
       - MB_PYTHON_VERSION=3.8
+      - MB_ML_VER=2014
       - ONNX_ML=1
   - os: linux 
     sudo: required 
     env: 
-      - MB_PYTHON_VERSION=3.5 
-      - ONNX_ML=1 
-      - PLAT=i686 
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.6 
-      - ONNX_ML=1 
+      - MB_PYTHON_VERSION=3.5
+      - MB_ML_VER=2014
+      - ONNX_ML=1
       - PLAT=i686
   - os: linux 
     sudo: required 
     env: 
-      - MB_PYTHON_VERSION=3.7 
-      - ONNX_ML=1 
+      - MB_PYTHON_VERSION=3.6
+      - MB_ML_VER=2014
+      - ONNX_ML=1
+      - PLAT=i686
+  - os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=3.7
+      - MB_ML_VER=2014
+      - ONNX_ML=1
       - PLAT=i686
   - os: linux
     sudo: required
     env:
       - MB_PYTHON_VERSION=3.8
+      - MB_ML_VER=2014
       - ONNX_ML=1
       - PLAT=i686
 
