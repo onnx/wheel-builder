@@ -22,7 +22,8 @@ services: docker
 # osx_image: xcode9.3beta
 matrix:
   include:
-  - os: osx
+  - name: "OSX Python 3.5"
+    os: osx
     language: generic
     sudo: required
     osx_image: xcode9.3beta
@@ -30,7 +31,8 @@ matrix:
       - MB_PYTHON_VERSION=3.5
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: osx
+  - name: "OSX Python 3.6"
+    os: osx
     language: generic
     sudo: required
     osx_image: xcode9.3beta
@@ -38,7 +40,8 @@ matrix:
       - MB_PYTHON_VERSION=3.6
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: osx
+  - name: "OSX Python 3.7"
+    os: osx
     language: generic
     sudo: required
     osx_image: xcode9.3beta
@@ -46,7 +49,8 @@ matrix:
       - MB_PYTHON_VERSION=3.7
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: osx
+  - name: "OSX Python 3.8"
+    os: osx
     language: generic
     sudo: required
     osx_image: xcode9.3beta
@@ -54,52 +58,60 @@ matrix:
       - MB_PYTHON_VERSION=3.8
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: linux 
+  - name: "Linux x64 Python 3.5"
+    os: linux 
     sudo: required 
     env: 
       - MB_PYTHON_VERSION=3.5
       - MB_ML_VER=2014
       - ONNX_ML=1
-  - os: linux 
+  - name: "Linux x64 Python 3.6"
+    os: linux 
     sudo: required 
     env: 
       - MB_PYTHON_VERSION=3.6
       - MB_ML_VER=2014
       - ONNX_ML=1
-  - os: linux 
+  - name: "Linux x64 Python 3.7"
+    os: linux 
     sudo: required 
     env: 
       - MB_PYTHON_VERSION=3.7
       - MB_ML_VER=2014
       - ONNX_ML=1
-  - os: linux
+  - name: "Linux x64 Python 3.8"
+    os: linux
     sudo: required
     env:
       - MB_PYTHON_VERSION=3.8
       - MB_ML_VER=2014
       - ONNX_ML=1
-  - os: linux 
+  - name: "Linux x86 Python 3.5"
+    os: linux 
     sudo: required 
     env: 
       - MB_PYTHON_VERSION=3.5
       - MB_ML_VER=2014
       - ONNX_ML=1
       - PLAT=i686
-  - os: linux 
+  - name: "Linux x86 Python 3.6"
+    os: linux 
     sudo: required 
     env: 
       - MB_PYTHON_VERSION=3.6
       - MB_ML_VER=2014
       - ONNX_ML=1
       - PLAT=i686
-  - os: linux 
+  - name: "Linux x86 Python 3.7"
+    os: linux 
     sudo: required 
     env: 
       - MB_PYTHON_VERSION=3.7
       - MB_ML_VER=2014
       - ONNX_ML=1
       - PLAT=i686
-  - os: linux
+  - name: "Linux x86 Python 3.8"
+    os: linux
     sudo: required
     env:
       - MB_PYTHON_VERSION=3.8
