@@ -63,28 +63,28 @@ matrix:
     sudo: required 
     env: 
       - MB_PYTHON_VERSION=3.5
-      - MB_ML_VER=2014
+      - MB_ML_VER=2010
       - ONNX_ML=1
   - name: "Linux x64 Python 3.6"
     os: linux 
     sudo: required 
     env: 
       - MB_PYTHON_VERSION=3.6
-      - MB_ML_VER=2014
+      - MB_ML_VER=2010
       - ONNX_ML=1
   - name: "Linux x64 Python 3.7"
     os: linux 
     sudo: required 
     env: 
       - MB_PYTHON_VERSION=3.7
-      - MB_ML_VER=2014
+      - MB_ML_VER=2010
       - ONNX_ML=1
   - name: "Linux x64 Python 3.8"
     os: linux
     sudo: required
     env:
       - MB_PYTHON_VERSION=3.8
-      - MB_ML_VER=2014
+      - MB_ML_VER=2010
       - ONNX_ML=1
   - name: "Linux x86 Python 3.5"
     os: linux 
