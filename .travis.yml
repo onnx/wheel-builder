@@ -60,8 +60,8 @@ after_success:
     pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
     ls ${TRAVIS_BUILD_DIR}/wheelhouse/;
     brew update
-    brew install openssl
-    brew install python3
+    brew upgrade openssl
+    brew upgrade python3
     python -m twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl --repository-url $TEST_REPO -u $PYPI_USERNAME -p $PYPI_PASSWORD ;
     echo "Deployed to test PyPI.";
   else
