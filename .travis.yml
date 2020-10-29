@@ -22,7 +22,8 @@ services: docker
 # osx_image: xcode9.3beta
 matrix:
   include:
-  - os: osx
+  - name: "OSX Python 3.5"
+    os: osx
     language: generic
     sudo: required
     osx_image: xcode9.3beta
@@ -30,82 +31,6 @@ matrix:
       - MB_PYTHON_VERSION=3.5
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: osx
-    language: generic
-    sudo: required
-    osx_image: xcode9.3beta
-    env:
-      - MB_PYTHON_VERSION=3.6
-      - ONNX_ML=1
-      - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: osx
-    language: generic
-    sudo: required
-    osx_image: xcode9.3beta
-    env:
-      - MB_PYTHON_VERSION=3.7
-      - ONNX_ML=1
-      - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: osx
-    language: generic
-    sudo: required
-    osx_image: xcode9.3beta
-    env:
-      - MB_PYTHON_VERSION=3.8
-      - ONNX_ML=1
-      - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.5
-      - MB_ML_VER=2010
-      - ONNX_ML=1
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.6
-      - MB_ML_VER=2010
-      - ONNX_ML=1
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.7
-      - MB_ML_VER=2010
-      - ONNX_ML=1
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=3.8
-      - MB_ML_VER=2010
-      - ONNX_ML=1
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.5
-      - MB_ML_VER=2010
-      - ONNX_ML=1
-      - PLAT=i686
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.6
-      - MB_ML_VER=2010
-      - ONNX_ML=1
-      - PLAT=i686
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.7
-      - MB_ML_VER=2010
-      - ONNX_ML=1
-      - PLAT=i686
-  - os: linux
-    sudo: required
-    env:
-      - MB_PYTHON_VERSION=3.8
-      - MB_ML_VER=2010
-      - ONNX_ML=1
-      - PLAT=i686
 
 before_install:
   - source multibuild/common_utils.sh;
@@ -134,6 +59,9 @@ after_success:
     pip install twine;
     pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
     ls ${TRAVIS_BUILD_DIR}/wheelhouse/;
+    brew update
+    brew install openssl
+    brew install python3
     python -m twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl --repository-url $TEST_REPO -u $PYPI_USERNAME -p $PYPI_PASSWORD ;
     echo "Deployed to test PyPI.";
   else
