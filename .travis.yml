@@ -57,7 +57,8 @@ after_success:
 - >
   if [ "$TRAVIS_BRANCH" == "pypi-test" ]; then
     brew update
-    brew upgrade python3
+    pyenv install 3.7.3
+    pyenv global 3.7.3
     pip install twine;
     pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
     ls ${TRAVIS_BUILD_DIR}/wheelhouse/;
