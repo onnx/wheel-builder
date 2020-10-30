@@ -66,8 +66,6 @@ after_success:
     pip install twine;
     pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
     ls ${TRAVIS_BUILD_DIR}/wheelhouse/;
-    python -m twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl --repository-url $TEST_REPO -u $PYPI_USERNAME -p $PYPI_PASSWORD ;
-    echo "Deployed to test PyPI.";
   else
     echo "Not deploying as not a commit on test branch.";
   fi
