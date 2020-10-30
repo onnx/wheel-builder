@@ -17,7 +17,7 @@ addons:
     s3_region: "us-west-1" # defaults to "us-east-1"
     debug: true
     paths:
-      - $(*.whl)
+      - $(git ls-files -o | grep .whl |tr "\n" ":")
     target_paths:
       - /test
 
