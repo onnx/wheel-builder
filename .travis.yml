@@ -16,6 +16,10 @@ addons:
   artifacts:
     s3_region: "us-west-1" # defaults to "us-east-1"
     debug: true
+    paths:
+      - $HOME/${TRAVIS_BUILD_DIR}/wheelhouse/*.whl
+    target_paths:
+      - /test
 
 language: python
 # Default Python version is usually 2.7
