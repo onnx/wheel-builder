@@ -17,7 +17,7 @@ addons:
     s3_region: "us-west-1" # defaults to "us-east-1"
     debug: true
     paths:
-      - $HOME/${TRAVIS_BUILD_DIR}/wheelhouse/*.whl
+      - $HOME/${TRAVIS_BUILD_DIR}/wheelhouse/onnx-1.8.0rc0-cp35-cp35m-macosx_10_9_intel.whl
     target_paths:
       - /test
 
