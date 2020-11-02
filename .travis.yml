@@ -4,7 +4,6 @@ env:
     - BUILD_COMMIT=87eb5988a5cced69b946f3d3f2963a0e271940b9
     - PLAT=x86_64
     - PB_VERSION=2.6.1
-    - UNICODE_WIDTH=32
     - REPO=https://upload.pypi.org/legacy/
     - TEST_REPO=https://test.pypi.org/legacy/
     - secure: RHpB38w8azGMD1v6NkxuJO9x/eqOEON+IWcqNVjOweZYwNkupZvjissludvXgjli5ZJ9mHG3JQD0alZa2fQ8UX3FOi1hh7OQf+vrZ6ydRm2XOr53IGAuG2G9iTdBngDma9sK9QjvzHFSX922YO9VW12x66/Ht0sARUmJ5W1y/2srUFfwcS1MTbMHQc3rb33OnrOvmv/Xx8S0LHnKYTsdLNRzsbNKUyWyVi379BeuiQF1ROB0mh9zcpK93TjkI9PU5lWZKLjoZWSj++ZIOQoTohDdjecYPiicj6b2HykUqNWl8AFA5UgfiYmmMgbnHNMEHn/uCJSGqGtA4sH51uoYw70rR/vZIQF6dy1Wx1EPQv3Qwb0O/ME2VA1p6HtXtfdkahOqXmvFbnKRVEkNB5+7qXUaId/RQpVbWrE/StZCJhxMgynSbs9Tr7Iu/Pd57ZTnZuPZPv5lE83bVWwo/WFjRZwwE28NSBcME6Y7FPjdyTARWfeFvhhS0OimTD5jk0jIVW5yWrqIOtOVc7M/ZvWXcl0r77F8/CJ9bupwLX+rusXkQ+n52nt8i1BIERWbKSgsDBnvdzkDAJp9nYuhYngN46FZnI2UYXXJsmFLDF1T+L2szJTJ+ZTjRB7dK73tXl42qeo1z9TbSHQZcRIh4dRqqbb3oPDGiMvwsTkbl8uya84=
@@ -32,8 +31,6 @@ services: docker
 # So we have the line below for OSX builds
 # osx_image: xcode9.3beta
 matrix:
-  allow_failures:
-    - name: "OSX Python 3.5" # will fail while uploading PyPi; upload the wheel anyway
   include:
   - name: "OSX Python 3.5"
     os: osx
@@ -146,7 +143,9 @@ script:
 
 after_success:
 - >
-  if [ -n "$TRAVIS_TAG" ]; then
+  if [ "$TRAVIS_PYTHON_VERSION" == "3.5" && "$TRAVIS_OS_NAME" == "osx"]; then
+    echo "Python 3.5 on Mac will fail while uploading PyPi package; save the wheel anyway";
+  elif [ -n "$TRAVIS_TAG" ]; then
     pip install twine;
     pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
     python -m twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl --repository-url $REPO -u $PYPI_USERNAME_TRAVIS -p $PYPI_PASSWORD_TRAVIS ;
@@ -155,7 +154,9 @@ after_success:
     echo "Not deploying as not a tagged commit.";
   fi
 - >
-  if [ "$TRAVIS_BRANCH" == "pypi-test" ]; then
+  if [ "$TRAVIS_PYTHON_VERSION" == "3.5" && "$TRAVIS_OS_NAME" == "osx"]; then
+    echo "Python 3.5 on Mac will fail while uploading PyPi package; save the wheel anyway";
+  elif [ "$TRAVIS_BRANCH" == "pypi-test" ]; then
     pip install twine;
     pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
     ls ${TRAVIS_BUILD_DIR}/wheelhouse/;
