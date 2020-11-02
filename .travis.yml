@@ -32,6 +32,8 @@ services: docker
 # So we have the line below for OSX builds
 # osx_image: xcode9.3beta
 matrix:
+  allow_failures:
+    - name: "OSX Python 3.5" # will fail while uploading PyPi; upload the wheel anyway
   include:
   - name: "OSX Python 3.5"
     os: osx
