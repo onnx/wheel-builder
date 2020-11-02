@@ -143,19 +143,13 @@ script:
 
 after_success:
 - >
-  if [ "$TRAVIS_PYTHON_VERSION" == "3.5" && "$TRAVIS_OS_NAME" == "osx"]; then
-    echo "Python 3.5 on Mac will fail while uploading PyPi package; save the wheel anyway";
+  if [[ $MB_PYTHON_VERSION == "3.5" && $TRAVIS_OS_NAME == "osx" ]]; then
+    echo "Python 3.5 on Mac will fail while uploading PyPi package. Save the wheel to AWS anyway.";
   elif [ -n "$TRAVIS_TAG" ]; then
     pip install twine;
     pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
     python -m twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl --repository-url $REPO -u $PYPI_USERNAME_TRAVIS -p $PYPI_PASSWORD_TRAVIS ;
     echo "Deployed to PyPI.";
-  else
-    echo "Not deploying as not a tagged commit.";
-  fi
-- >
-  if [ "$TRAVIS_PYTHON_VERSION" == "3.5" && "$TRAVIS_OS_NAME" == "osx"]; then
-    echo "Python 3.5 on Mac will fail while uploading PyPi package; save the wheel anyway";
   elif [ "$TRAVIS_BRANCH" == "pypi-test" ]; then
     pip install twine;
     pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
