@@ -1,7 +1,7 @@
 env:
   global:
     - REPO_DIR=onnx
-    - BUILD_COMMIT=06aa517d11674e15b596cc5169bea8384978d84e
+    - BUILD_COMMIT=994c6181247d7b419b28889fc57d5817e2089419
     - PLAT=x86_64
     - PB_VERSION=2.6.1
     - REPO=https://upload.pypi.org/legacy/
