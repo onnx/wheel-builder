@@ -1,14 +1,24 @@
 env:
   global:
     - REPO_DIR=onnx
-    - BUILD_COMMIT=0c070abb0c40fec649f81a73a75b0098662ec486
+    - BUILD_COMMIT=994c6181247d7b419b28889fc57d5817e2089419
     - PLAT=x86_64
     - PB_VERSION=2.6.1
-    - UNICODE_WIDTH=32
     - REPO=https://upload.pypi.org/legacy/
     - TEST_REPO=https://test.pypi.org/legacy/
-    - secure: qvdFuTC+kSgm8uPvTOG4NRE6EnuH6/AsOeGmYJhxaynfxGK9skp+DZv2ioT2HE/kxW+PekkVsyrcjZc185cZFXtiTxVkWakbjoD3Bk8YZrjIjcHOjdz4nu1KePVOa8ymqangQhwKekBk2eQ84Ktx38DiuySLSjHbZZ6Z9Rqxeh6ucYLD2rgjGSTjDlMlcvzojiJ213a9xVQsaY9gnagYds6U0zHHPRj5pHrcLD0N9tI0bdyxxAGglT6T2cGwIvLx1/Kcseedqv7hONN4TYJrZnaldYf1TdLsBwtU4proiiv0+eckXAi9Pum/hNMVQhvvm/TpDGLDDKflpMzhSS9CBdW0WVbFnRWONqXyWodlIWaxuUVIqfjHR8vC7Qg1RM50G04h4di2CuSS00fzR6weAfcMDYCbgFRq7KeSCueVjF9HTLLPjhLCwo6KvinpjRk2vDZyd5Y89pXzn0BxHxK3DwePZhFmjUo89MrSDYMm12Os6TEOGsxK+XMKj92i8YVRgE2z3O/o/D7da33MsbjhkLqzUjbqS1zv+KwEPcF6Gyoo/nRxTcAv1uVyS8WRkS8GmEg8Vpr7QIAdK9gdTbS8xYSEBG3nJhjQjrasS9RzsYKENyqNmfM54jYf7/pCq3D/whv/njaYQ061E7LcvI0uMzM3fE6VUB7Gkk0eH5NvezY=
-    - secure: Qn+n/myUVDQdg6OPgK3E7/RhVdgkMYlL0pRmIP3HnHxd6iyVwrgY20py2obA7MmIWLvEHjgfJxxZhdgg2RtCx7Ft7y11nhlsAyvTB0If4HRgTfRJ+QuOhr6LqKn/Pz69r/4gLzNNMyIZGtDjV/EO/a2Dkr+hZw1/0lBVEv5wb/YxAHUcGHh2x7i/Q6ErfLdL4GU72OSQwx2Fed6lktCf2nBt+VoWuzD3N7/sUiKSeLr5/qCYVkRI4rWN4uQst3uZIY9GWJhb9IgDLHvkrNU5NvNFscwpcMeMzEpgKfvHQINFgtpTpaNAbu+EDbvHWOqJ11IqeQfZN6T53zUdctb7yCsWZXkeTy+Q2Is0CrUgcEWQVmy3eCTo2v+U10uzxFi6X1+hOn8r+7bFB3VRSh456hreZZP4DIJReJX4+T7F50eVwVdgjp+ZODl44HlCaiz2LuWAQZpQ/cCMiXV7IT8RbaF7xobMhWGKv0SJvodajs7BWciPnp7mPsGhiyNQ9IGlj1WvL83w23Mdz6L0+i46gAZNuKXiebva/ioOXyLvvMJ4MzxSdfLMxAznto4KIns6dMwebIHsy382Pccwpgao9jzSJomN+V1OS+GRRyWOb4XXy21E+pq3YmfUfxpGc9ocSjvvRyR9jZ6RGJVuQvGSsBJjX55CggbbVrZPKZXHIH8=
+    - secure: RHpB38w8azGMD1v6NkxuJO9x/eqOEON+IWcqNVjOweZYwNkupZvjissludvXgjli5ZJ9mHG3JQD0alZa2fQ8UX3FOi1hh7OQf+vrZ6ydRm2XOr53IGAuG2G9iTdBngDma9sK9QjvzHFSX922YO9VW12x66/Ht0sARUmJ5W1y/2srUFfwcS1MTbMHQc3rb33OnrOvmv/Xx8S0LHnKYTsdLNRzsbNKUyWyVi379BeuiQF1ROB0mh9zcpK93TjkI9PU5lWZKLjoZWSj++ZIOQoTohDdjecYPiicj6b2HykUqNWl8AFA5UgfiYmmMgbnHNMEHn/uCJSGqGtA4sH51uoYw70rR/vZIQF6dy1Wx1EPQv3Qwb0O/ME2VA1p6HtXtfdkahOqXmvFbnKRVEkNB5+7qXUaId/RQpVbWrE/StZCJhxMgynSbs9Tr7Iu/Pd57ZTnZuPZPv5lE83bVWwo/WFjRZwwE28NSBcME6Y7FPjdyTARWfeFvhhS0OimTD5jk0jIVW5yWrqIOtOVc7M/ZvWXcl0r77F8/CJ9bupwLX+rusXkQ+n52nt8i1BIERWbKSgsDBnvdzkDAJp9nYuhYngN46FZnI2UYXXJsmFLDF1T+L2szJTJ+ZTjRB7dK73tXl42qeo1z9TbSHQZcRIh4dRqqbb3oPDGiMvwsTkbl8uya84=
+    - secure: eNcBc4erIqiXEhEtUNDAYRPgTCftDna88q5yryIsjpiYEgykm0K9ylY+L6nge8CwgwZipjsPyA43gKgV3pToD830qU32+U/C6xTJaaEiIfbQh8kW5AdOF5CE2T/N3CbgFhOBumQnxVTgZwfs9lI/KTHQHesErZ1gI/D1aaX3UAYd473dyQmsjkbUFJK5yTZ6Swh2xy4ao28DWgphSzwYiClIhBSjeCfOgJFI6o2tD1CbByNMqx+1WeK9pBvOgkNS5rigcMcAlRFOrPY8YnBueB2e7IEHHNtXH96uR0YWGA6aLl+o97nZ0kYH/V1yicCa/JE1/B5ZC0JPCMOw4xJbLXM87/yFbPgGNxm5DwXxMvF/dDiZpC1pubT2qn/6wpEDFPKqureSK9eilt95neLGMUC/QuyKiargejrJ9cXlsUhRx5f4YxfBmkSHCXtNQ+X62VMwBnfDEdPE7we/0OMShuRcENzfGfIfW2zVSX2px4QUQVX4I49GW43aEPWKj7x8OjxTT5r4aIeDjIe+blXuN3Cqjq1obBWusF+kH3yD564/XCi8gnozSY8hzbjCIVUSDf4fj7InzVk3HdLQOPmXRkQ9FjAgYbMnXWs71B2CDoJHu5319OSZXzlUGm9xCHtWqAnJLi4JhKMzN55Zat3R5JyuzGA28dv8qt9e8/dnvHc=
+    - secure: pRolU0r+KbbC5o4uPrNAOF33SfpaQbcWKvzNJdZ9MXaJwivGcczmpDiYNIoEW8CWn8GOwll9fG8/3Fiwth8Sqyl8/ipJAjv57DAvoF8FlxuHxYNfCbatgzUJvH9OWrNzynvB5bXXl9oK87+mfzip9H7B4YG6y8guYa9fAQ1Lto5wdUfUrSDhKxiE9+KPQnu+nvG+9bHaTEgjeBe/os23e4MmHFcb1wqXGNhXLqiVtvUEQHKM0SdHS5AdTNsAxzAzs6NJFGKXKrLYJ1/+S8sT6BgIVDXbrhYHBnQgJpgRHvgiixe9cU2NM6lhb1NwrLwkDTbGIdnBBC6C378JsKHPIJ8tQrsGCW/zcmAAgMYnKjAE08ipAlXgbLTmMZxH5UqOvq9Y9nhw91CXa8ymtPt4PPvJZHI6MSL42/W0rQ/jdsFdEhLOAf4eI7r8WESaVC5dDM/GifzM9dCx6EzQKDYmnVXkF33B1EDp3lEv/mEiZRy56SWyp7NKduW8xE7otxPt0oufH5oJuIbkuPdfqxNPiQiaJqDjTOwKaBH8onhsDv5SO2OVPTLmrEvggWoMHeFzJbpxGRrVKqvoy9ipXTGjmy6WoFN8+Nxw5n84siEMWyHTrXCvD82gIgK4SKRyz32fy6EY6kP4zvCLOtSspajstw7eTRzd5KQ1Mxd/GKeFHG0=
+    - secure: bB/mfE8dMPwW+G+ZAISfWqtIAekg1iEeexwj4XIA6mv2T33gqgXcDhl+jiU31EM0gHZG2URiL9QHNSQOdw6vVtl+sqks0JDvVW1F96mRWWKoLX4PekDCxQaRlFZ8/MQbH/t7+gtSn925NQW4LLVrnjIMpLAMnSOzg0GddC4ONdb3AQjm2WOafvcp1nERJfOvYSyojM5LqczAuy2Rj5dQaDvYl3iC2/FvauyTADYV/UMaCY4ajky1SSysccSTAEVSSw/pRyvWGH1e6Z9aX8n+bHLu5VKpaahVTxpHj2GQC1BpRQieIIT8nJ0zv2fPUV1rdWj5PT6zKF/pAuPYS7OBX9U8bEHRR97TaSAyorXVMGtuwCmG4Bzh8EAOmbAFuuuww7x285HhkjWKz3bxr5axeIFjv17nsEfR1OdTFHq/sy7KMwKWxxTjEfQjtbJic8W+SAdnTutyWegoFChr0EcW7HWOPMikyaO0nZ68wRJu+XbqP/B9bsK7bgElXEOqHAKcs+4OAEmiLZkNLBsetB/8PYGcHRrj2hn1WWNpNR47DAYXaoz4F338oKCFjQV8NuWEnd8RUWFp5irO7fK82U2hWPVgJsEsIJXLs79dNZEeQbmXQodF+9gEfM5hxCZFV2FvOqEyb1oFs1h7RlTDtgidht+sMfu+oh2tOfPg8Ci6MRo=
+    - secure: RLmYfdQgXzHOaKVm9xq6Ao5MHXeHw9Y8YXPb0dEqPBtmMntIqcVYMKrO1h/bTAttP1LKlRMJOXS2+eiZgDzClfdvryzNgaFEXNJIY0mZ1AiraQG3UeMmJp3B+5fVLCGHCkLfqEtI5Tka46jquiUsqCajrMnHuRRQL1IPFSuPMa4lvPVSIEmBwWQIIIzfJvJrIDt5d2hVJCQ3G2Z0ylsJFQjJwbhWGT71ULpre7JWsy8XHqiFdZF3P+ELHxjdpz6XxDJkSHMZ5VIkg0XjBxAupmi8tr3vsAgRb8hfBsU/KqPRL2DLXQ0eI364+0ed4SC32aBBL1lETtiz/RLMQDdD8E62DMXLzpmqQT/dM5X3w6lWLOlCv8BAoow1iLkt8TcP2k9DXl7FCEvYagWIt2c04B3lqahdC+LM0Rx3Yc6crufWm7PzaHObFwhOzdHw3/z6J0NgvqWhVckZU4Use1bvCE4JSV8b57x/nclZRXVfu8UMAIvJAUhUs3TYOKh4V4Bgf6tD/k0K/x8Nh2qTpyEWPGq5txzJX+QEZu0SWYIULv6G3Ils9WUXplYmg77ybU/kDDoGNmjbgrdQrOPs4cdAd8iXsW1PDHBYXrbVs3mCCEk2R2o51gtVXlgWjeNYn0bXe+Ac4nHSi196ctJ4ZPLvcM5f0ccUP1wgo/h8Uo3iQWU=
+addons:
+  artifacts:
+    s3_region: "us-west-1" # defaults to "us-east-1"
+    debug: true
+    paths:
+      - $(git ls-files -o | grep .whl |tr "\n" ":")
+    target_paths:
+      - /test
 
 language: python
 # Default Python version is usually 2.7
@@ -22,7 +32,8 @@ services: docker
 # osx_image: xcode9.3beta
 matrix:
   include:
-  - os: osx
+  - name: "OSX Python 3.5"
+    os: osx
     language: generic
     sudo: required
     osx_image: xcode9.3beta
@@ -30,7 +41,8 @@ matrix:
       - MB_PYTHON_VERSION=3.5
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: osx
+  - name: "OSX Python 3.6"
+    os: osx
     language: generic
     sudo: required
     osx_image: xcode9.3beta
@@ -38,7 +50,8 @@ matrix:
       - MB_PYTHON_VERSION=3.6
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: osx
+  - name: "OSX Python 3.7"
+    os: osx
     language: generic
     sudo: required
     osx_image: xcode9.3beta
@@ -46,7 +59,8 @@ matrix:
       - MB_PYTHON_VERSION=3.7
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: osx
+  - name: "OSX Python 3.8"
+    os: osx
     language: generic
     sudo: required
     osx_image: xcode9.3beta
@@ -54,80 +68,64 @@ matrix:
       - MB_PYTHON_VERSION=3.8
       - ONNX_ML=1
       - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: osx
-    language: generic
-    sudo: required
-    osx_image: xcode9.3beta
-    env:
-      - MB_PYTHON_VERSION=2.7
+  - name: "Linux x64 Python 3.5"
+    os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=3.5
+      - MB_ML_VER=2010
       - ONNX_ML=1
-      - MACOSX_DEPLOYMENT_TARGET=10.9
-  - os: linux 
+  - name: "Linux x64 Python 3.6"
+    os: linux 
     sudo: required 
     env: 
-      - MB_PYTHON_VERSION=2.7 
-      - ONNX_ML=1 
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=2.7 
-      - ONNX_ML=1 
-      - UNICODE_WIDTH=16 
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=2.7 
-      - ONNX_ML=1 
-      - PLAT=i686 
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=2.7 
-      - ONNX_ML=1 
-      - UNICODE_WIDTH=16 
-      - PLAT=i686 
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.5 
-      - ONNX_ML=1 
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.6 
-      - ONNX_ML=1 
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.7 
+      - MB_PYTHON_VERSION=3.6
+      - MB_ML_VER=2010
       - ONNX_ML=1
-  - os: linux
+  - name: "Linux x64 Python 3.7"
+    os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=3.7
+      - MB_ML_VER=2010
+      - ONNX_ML=1
+  - name: "Linux x64 Python 3.8"
+    os: linux
     sudo: required
     env:
       - MB_PYTHON_VERSION=3.8
+      - MB_ML_VER=2010
       - ONNX_ML=1
-  - os: linux 
+  - name: "Linux x86 Python 3.5"
+    os: linux 
     sudo: required 
     env: 
-      - MB_PYTHON_VERSION=3.5 
-      - ONNX_ML=1 
-      - PLAT=i686 
-  - os: linux 
-    sudo: required 
-    env: 
-      - MB_PYTHON_VERSION=3.6 
-      - ONNX_ML=1 
+      - MB_PYTHON_VERSION=3.5
+      - MB_ML_VER=2010
+      - ONNX_ML=1
       - PLAT=i686
-  - os: linux 
+  - name: "Linux x86 Python 3.6"
+    os: linux 
     sudo: required 
     env: 
-      - MB_PYTHON_VERSION=3.7 
-      - ONNX_ML=1 
+      - MB_PYTHON_VERSION=3.6
+      - MB_ML_VER=2010
+      - ONNX_ML=1
       - PLAT=i686
-  - os: linux
+  - name: "Linux x86 Python 3.7"
+    os: linux 
+    sudo: required 
+    env: 
+      - MB_PYTHON_VERSION=3.7
+      - MB_ML_VER=2010
+      - ONNX_ML=1
+      - PLAT=i686
+  - name: "Linux x86 Python 3.8"
+    os: linux
     sudo: required
     env:
       - MB_PYTHON_VERSION=3.8
+      - MB_ML_VER=2010
       - ONNX_ML=1
       - PLAT=i686
 
@@ -145,16 +143,14 @@ script:
 
 after_success:
 - >
-  if [ -n "$TRAVIS_TAG" ]; then
+  if [[ $MB_PYTHON_VERSION == "3.5" && $TRAVIS_OS_NAME == "osx" ]]; then
+    echo "Python 3.5 on Mac will fail while uploading PyPi package. Save the wheel to AWS anyway.";
+  elif [ -n "$TRAVIS_TAG" ]; then
     pip install twine;
     pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
     python -m twine upload --skip-existing ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl --repository-url $REPO -u $PYPI_USERNAME_TRAVIS -p $PYPI_PASSWORD_TRAVIS ;
     echo "Deployed to PyPI.";
-  else
-    echo "Not deploying as not a tagged commit.";
-  fi
-- >
-  if [ "$TRAVIS_BRANCH" == "pypi-test" ]; then
+  elif [ "$TRAVIS_BRANCH" == "pypi-test" ]; then
     pip install twine;
     pip install pyOpenSSL ndg-httpsclient pyasn1 || true;
     ls ${TRAVIS_BUILD_DIR}/wheelhouse/;

@@ -2,7 +2,7 @@
 function build_wheel {
     build_libs
     export ONNX_ML=1
-    time ONNX_NAMESPACE=ONNX_REL_1_7 build_bdist_wheel $@
+    time ONNX_NAMESPACE=ONNX_REL_1_8 build_bdist_wheel $@
 }
 
 function build_libs {
@@ -12,7 +12,7 @@ function build_libs {
       export NUMCORES=`sysctl -n hw.ncpu`
     fi
     echo Using $NUMCORES cores
-
+    # Linux
     if [ -z "$IS_OSX" ]; then
         APT_INSTALL_CMD='yum -y install'
         # Install protobuf
@@ -26,8 +26,13 @@ function build_libs {
         cd ${pb_dir} && ./configure && make -j${NUMCORES} && make check && make install && ldconfig 2>&1 || true
         ccache -s
         export PATH="/usr/lib/ccache:$PATH"
+    # Mac
     else
-        brew install ccache protobuf
+        brew install ccache
+        # Install protobuf 3.11.3 due to compatibility
+        wget https://raw.githubusercontent.com/Homebrew/homebrew-core/66613cae31ad29ac4b1af532220aeb9e11d9672f/Formula/protobuf.rb
+        brew install protobuf.rb
+        pip install protobuf==3.11.3
         export PATH="/usr/local/opt/ccache/libexec:$PATH"
         echo PATH: $PATH
         pip install pytest-runner
