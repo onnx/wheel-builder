@@ -1,3 +1,6 @@
+
+# [<b>Notice</b>] We have stopped development of onnx/wheel-builder. This repo won't be updated anymore. Going forward ONNX will directly use GiHub Action in onnx repo to release ONNX packages: [onnx/.github/workflows/release_*.yml](https://github.com/onnx/onnx/tree/main/.github/workflows).
+
 Building and uploading ONNX wheels
 ===================================
 
